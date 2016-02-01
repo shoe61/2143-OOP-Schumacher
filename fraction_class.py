@@ -5,7 +5,7 @@ class fraction(object):
         self.denominator = d
 
     def __str__(self):
-        return "%s-%s/%s" % (self.whole , self.numerator , self.denominator)
+        return "%s %s/%s" % (self.whole , self.numerator , self.denominator)
 
     def whole(self,w):
         self.whole = w
