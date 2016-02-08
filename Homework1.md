@@ -16,8 +16,8 @@
 
 ### Comments:
 ```
-does not add numerators, multiplies them. no comments, whole numbers not really handled at all. if you need help see 
-dr griffin.  
+does not add numerators, multiplies them. no comments, whole numbers not really handled at all. 
+if you need help see dr griffin.  
 ```
 
 [1]: http://f.cl.ly/items/3E231i211n2E042B1U3K/right.png  "Correct"
