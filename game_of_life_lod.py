@@ -68,7 +68,13 @@ class golBoard(object):
         alive = self.currentGen[r][c]
 
         print(self.getNeighborWindow(r,c))
-		
+        
+        """
+        Using the mod function: if, for example, row 0 examines (r-1), the result is -1.
+        -1 % 20 = 19, so the function is wrapped. Cells in the leftmost column and
+        tompost row consider cells in the righmost column or bottom row their neighbors
+        and vice versa.
+        """
         neighbors.append(self.currentGen[(r-1) % self.height][(c-1) % self.width])     # upper left corner
         neighbors.append(self.currentGen[(r-1) % self.height][c])                      # top row except corners   
         neighbors.append(self.currentGen[(r-1) % self.height][(c+1) % self.width])     # upper right corner
@@ -78,18 +84,18 @@ class golBoard(object):
         neighbors.append(self.currentGen[(r+1) % self.height][c])                      # bottom except corners] 
         neighbors.append(self.currentGen[(r+1) % self.height][(c+1) % self.width])     # lower right corner
             
-        # count = neighbors.count(True)
+        count = neighbors.count(True)
 
-        # if(alive):
-        #     if count < 2 or count > 3:
-        #         return 0 
-        #     else:
-        #         return 1
-        # else:
-        #     if count == 3:
-        #         return 1
-        #     else:
-        #         return 0 
+        if(alive):
+            if count < 2 or count > 3:
+                return 0 
+            else:
+                return 1
+        else:
+            if count == 3:
+                return 1
+            else:
+                return 0 
         
  
     def getNeighborWindow(self,r,c):
