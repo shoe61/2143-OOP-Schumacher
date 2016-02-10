@@ -67,7 +67,7 @@ class golBoard(object):
         neighbors = []
         alive = self.currentGen[r][c]
 
-        '''print(self.getNeighborWindow(r,c))'''
+        #print(self.getNeighborWindow(r,c))
         
         """
         Using the mod function: if, for example, row 0 examines (r-1), the result is -1.
@@ -277,16 +277,19 @@ def print_format_table():
 
 
 
-rows = 20
-cols = 30
-generations = 30
-density = .25
-sleep = .05
-for x in range(generations):
-    b = golBoard(rows,cols,True,density)
-    clearScreen()
-    print(b.stringifyWorld())
-    time.sleep(sleep)
+if __name__ == '__main__':
+
+    rows = 20
+    cols = 30
+    generations = 30
+    density = .25
+    sleep = .05
+    b = golBoard(rows, cols, True, density)
+    for x in range(generations):
+        b.computeNextGen()       
+        clearScreen()
+        print(b.stringifyWorld())
+        time.sleep(sleep)
 
 b.printColoredSection(5,6)
 #print_format_table()
