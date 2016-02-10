@@ -67,7 +67,7 @@ class golBoard(object):
         neighbors = []
         alive = self.currentGen[r][c]
 
-        print(self.getNeighborWindow(r,c))
+        '''print(self.getNeighborWindow(r,c))'''
         
         """
         Using the mod function: if, for example, row 0 examines (r-1), the result is -1.
