@@ -1,0 +1,45 @@
+def shift(lst, shft=0):
+    ln = len(lst)
+    for i, ele in enumerate(lst[:]):
+        lst[(i + shft) % ln] = ele
+    return lst
+
+	
+	 origIndex = f.index(el)
+    newIndex = (origIndex + 2)%5
+    origIndex, newIndex = newIndex, origIndex
+    print(f)
+    print(f.index(el))
+	
+	
+	
+	
+	
+	
+	
+	f = [1, 2, 3, 4, 5, 6]
+
+for i in range(len(f)):
+    i += 2
+    if (i > (len(f) - 1)):
+        i -= (len(f))
+    print(i)
+    #print(f[i])
+print(f)
+
+
+***********************************************
+this works for problem F:
+
+f = [1, 2, 3, 4, 5, 6]
+g =[]
+
+for i in range(len(f)):
+    iNew = i + 2
+    if (iNew > (len(f) - 1)):
+        iNew -= (len(f))
+    print(iNew)
+    print(f[iNew])
+    g.insert(len(g), f[iNew])
+    
+print(g)
