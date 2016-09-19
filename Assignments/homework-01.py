@@ -156,7 +156,7 @@ print(superbowls)
 def replace(d, x, y):
     for k in d.keys():
         if d[k] == x:
-            dict[k] = y
+            d[k] = y
     print(d)
 
 dict = {'bob': 3, 'fred': 7, 'wilma': 8, 'ginger': 4, 'maryann': 9}
@@ -171,7 +171,7 @@ def removIt(d, rmv):
     d = {k:v for k, v in d.items() if not v == rmv}
     print(d)
 
-d = {1:2, 'underdog': 'sweet polly purebred', 2:3, 3:2, 4:5, 7:2, 'boris': 'natsha', 'tobor': 2}
+d = {1:2, 'underdog': 'sweet polly purebred', 2:3, 3:2, 4:5, 7:2, 'boris': 'natasha', 'tobor': 2}
 removIt(d, 2)
 
-#prints: {'underdog': 'sweet polly purebred', 2: 3, 4: 5, 'boris': 'natsha'}
+#prints: {'underdog': 'sweet polly purebred', 2: 3, 4: 5, 'boris': 'natasha'}
