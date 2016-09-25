@@ -29,6 +29,11 @@ class fraction(object):
         else: 
             return "%d / %d" %(self.numerator,self.denominator)
 
+    def __mul__(self,rhs):
+        numerator = (self.numerator + int(self.denominator * self.whole))  * (rhs.numerator + int(rhs.denominator * rhs.whole))
+        denominator = self.denominator * rhs.denominator
+        return fraction(0,numerator,denominator)
+    
     def __add__(self,rhs):
         denominator = int(self.denominator * rhs.denominator)
         numerator = int((self.numerator + int(self.denominator * self.whole)) * rhs.denominator) + int((rhs.numerator + int(rhs.denominator * rhs.whole)) * self.denominator)
@@ -37,14 +42,19 @@ class fraction(object):
         else:
             return fraction(0, numerator,denominator)
 
+if __name__ == '__main__':
+
+    a = fraction(1,1,2)
+    b = fraction(0,4,5)
+    c = a*b
+    d = a + b
+    print('fraction a = ',a)
+    print('fraction b = ',b)
+    print('a times b = ',c)
+    print('a plus b = ',d)
 
 
 
 
-F = fraction(1,1,3)
-G = fraction(1,1,4)
 
-print('F: ', F, '  G: ', G)
 
-H = F + G
-print('H = ', H)
