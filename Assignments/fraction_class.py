@@ -1,3 +1,11 @@
+"""
+Name: Scott Schumacher
+Email: scottmachershoe@yahoo.com
+Assignment: fraction class
+Due: 26 Sep @ 1:00 p.m.
+"""
+
+
 class fraction(object):
 
     def __init__(self,wh=None,n=None,d=None):
