@@ -25,7 +25,7 @@ class fraction(object):
         
     def __str__(self):
         if self.whole  > 0:
-            return "%d -  %d / %d" % (self.whole,self.numerator,self.denominator)
+            return "%d    %d / %d" % (self.whole,self.numerator,self.denominator)
         else: 
             return "%d / %d" %(self.numerator,self.denominator)
 
