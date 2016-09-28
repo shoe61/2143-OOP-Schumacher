@@ -1,4 +1,12 @@
 """
+Name: Scott Schumacher
+Email: scottmachershoe@yahoo.com
+Assignment: fraction class
+Due: 3 Oct 2016 @ 1:00 p.m.
+"""
+
+
+"""
 @ Name: ShiftCipher
 @ Description: Simple class to do a shift cipher
 """
@@ -6,9 +14,8 @@ class ShiftCipher(object):
 	
 	"""
 	@ Name: __init__
-	@ Description: 
-	@ Params:
-	     None
+	@ Description: Constructor
+	@ Params: None
 	"""
 	def __init__(self):
 		
@@ -16,8 +23,11 @@ class ShiftCipher(object):
 		self.cipherText = None
 		self.cleanText = None
 		self.shift = 3
+
 	"""
-	Nice string representation of your class to help debug.
+	@ Name: __init__
+	@ Description: Constructor
+	@ Params: None
 	"""
 	def __str__(self):
 		return "plainText: %s\ncipherText: %s\ncleanText: %s\nshift: %d\n" % (self.plainText,self.cipherText,self.cleanText,self.shift)
@@ -25,8 +35,7 @@ class ShiftCipher(object):
 	"""
 	@ Name: promptUserMessage
 	@ Description: Prompts user for message from standard in
-	@ Params:
-	     None
+	@ Params: None
 	"""
 	def promptUserMessage(self):
 		temp = raw_input("Message: ")
@@ -35,9 +44,8 @@ class ShiftCipher(object):
 	"""
 	@ Name: setMessage
 	@ Description: sets plaintext and then cleans and calls encrypt.
-	@ Params:
-	     message {string}: String message
-	     encrypted {bool}: False = plaintext True=ciphertext
+	@ Params:	message {string}: String message
+	     		encrypted {bool}: False = plaintext True=ciphertext
 	"""
 	def setMessage(self,message,encrypted=False):
 		if(not encrypted):
@@ -47,19 +55,45 @@ class ShiftCipher(object):
 		else:
 			self.cipherText = message
 			self.__decrypt()
-	
+
+	"""
+	@ Name: getCipherText
+	@ Description: gets cipher text
+	@ Params: None
+	"""	
 	def getCipherText(self):
 		return self.cipherText
-		
+
+	"""
+	@ Name: getPlainText
+	@ Description: gets plain text
+	@ Params: None
+	"""		
 	def getPlainText(self):
 		return self.plainText
 
+	"""
+	@ Name: setShift
+	@ Description: sets this.shift
+	@ Params: shift
+	"""
 	def setShift(self,shift):
 		self.shift = shift
-	
+
+	"""
+	@ Name: getShift
+	@ Description: gets shift
+	@ Params: None
+	"""	
 	def getShift(self):
 		return self.shift
-		
+
+	"""
+	@ Name: cleanData
+	@ Description: 	removes all but alphanumeric characters
+	@				converts all alpha to uppercase
+	@ Params: None
+	"""		
 	def cleanData(self):
 		self.cleanText = ''
 		for letter in self.plainText:
@@ -77,8 +111,10 @@ class ShiftCipher(object):
 				self.cleanText += letter
 
 	"""
-	Encrypts plaintext not ciphertext
-	"""
+	@ Name: __encrypt
+	@ Description: 	encrypts clean text
+	@ Params: None
+	"""	
 	def __encrypt(self):
 		self.cipherText = ''
 		if(not self.cleanText):
@@ -86,11 +122,14 @@ class ShiftCipher(object):
 		for letter in self.cleanText:
 		    self.cipherText += chr((((ord(letter)-65) + self.shift) % 26)+65)
 		    
-		
-	
 	"""
-	Decrypts ciphertext not plaintext
-	"""
+	@ Name: __decrypt
+	@ Description: 	decrypts cipher text...very simple!
+	@				reverses the encryption process: subtracts shift and reverses
+	@				modulo operation by adding 26 until character is within range
+	@				of uppercase alphanumerics
+	@ Params: None
+	"""	
 	def __decrypt(self):
 		self.plainText = ''
 		if(not self.cipherText):
