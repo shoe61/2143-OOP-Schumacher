@@ -92,7 +92,11 @@ class ShiftCipher(object):
 	Decrypts ciphertext not plaintext
 	"""
 	def __decrypt(self):
-		pass
+		self.plainText = ''
+		if(not self.cipherText):
+			return
+		for letter in self.cipherText:
+			self.plainText += chr(((ord(letter) - 65) - self.shift)  +65)
 
 """
 Only run this if we call this file directly:
@@ -100,7 +104,7 @@ Only run this if we call this file directly:
 if __name__=='__main__':
 
     alice = ShiftCipher()
-    alice.setMessage('Hello&&##((())) World            n           1998')
+    alice.setMessage('@th   e g#oo---d th(e b&ad an )d th_)e ug&%$ly((')
     print(alice)
 
 
