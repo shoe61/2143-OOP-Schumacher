@@ -71,7 +71,7 @@ class ShiftCipher(object):
 				continue
 			if 90 < ord(letter) < 97:
 				continue
-			if 122 > ord(letter) > 96:
+			if 123 > ord(letter) > 96:
 				self.cleanText += chr(ord(letter)-32)
 			else:
 				self.cleanText += letter
@@ -96,7 +96,11 @@ class ShiftCipher(object):
 		if(not self.cipherText):
 			return
 		for letter in self.cipherText:
-			self.plainText += chr(((ord(letter) - 65) - self.shift)  +65)
+			ltr = ord(letter) - self.shift
+			while 57 < ltr < 65 or ltr < 48:
+				ltr += 26 
+			self.plainText += chr(ltr)
+			#self.plainText += chr(ord(letter) - self.shift) 
 
 """
 Only run this if we call this file directly:
@@ -104,7 +108,7 @@ Only run this if we call this file directly:
 if __name__=='__main__':
 
     alice = ShiftCipher()
-    alice.setMessage('@th   e g#oo---d th(e b&ad an )d th_)e ug&%$ly((')
+    alice.setMessage('help me, Mr. Wizard... I dont want to be a programmer anymore')
     print(alice)
 
 
