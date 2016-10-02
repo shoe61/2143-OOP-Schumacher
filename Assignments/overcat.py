@@ -4,7 +4,8 @@ Email: scottmachershoe@yahoo.com
 Assignment: fraction class
 Due: 3 Oct 2016 @ 1:00 p.m.
 """
-
+import sys
+print(sys.argv)
 
 """
 @ Name: ShiftCipher
@@ -97,18 +98,14 @@ class ShiftCipher(object):
 	def cleanData(self):
 		self.cleanText = ''
 		for letter in self.plainText:
-			# ignore spaces
 			if ord(letter) == 32:
 				continue
-			# ignore characters where ord < 48, floor numerals
 			if ord(letter) < 48:
 				continue
-			# ignore charactes between ceiling numerals and floor letters
 			if 57 < ord(letter) < 65:
 				continue
 			if 90 < ord(letter) < 97:
 				continue
-			# change all lowercase letters to uppercase
 			if 123 > ord(letter) > 96:
 				self.cleanText += chr(ord(letter)-32)
 			else:
@@ -124,7 +121,7 @@ class ShiftCipher(object):
 		if(not self.cleanText):
 			return
 		for letter in self.cleanText:
-		    self.cipherText += chr((((ord(letter)-48) + self.shift) % 43)+48)
+		    self.cipherText += chr((((ord(letter)-65) + self.shift) % 26)+65)
 		    
 	"""
 	@ Name: __decrypt
@@ -141,10 +138,9 @@ class ShiftCipher(object):
 		for letter in self.cipherText:
 			ltr = ord(letter) - self.shift
 			while 57 < ltr < 65 or ltr < 48:
-				ltr += 43 
+				ltr += 26 
 			self.plainText += chr(ltr)
 			#self.plainText += chr(ord(letter) - self.shift) 
-
 
 """
 Only run this if we call this file directly:
@@ -162,4 +158,4 @@ if __name__=='__main__':
 
 
     
-print('bob: \n' , bob)
+print(bob)
