@@ -4,158 +4,194 @@ Email: scottmachershoe@yahoo.com
 Assignment: fraction class
 Due: 3 Oct 2016 @ 1:00 p.m.
 """
-import sys
-print(sys.argv)
+
+
+
+
+"""book = ['a', 'b', 3, 4, "joe"]
+for banana in book:
+	print(banana)
+
+for i in range(len(book)):
+	print (book[i])"""
+
+dict ={'a': 1, 'b': 2, 'c': 3}
+
+print(dict['a'])
+"""for k in dict:
+	print (k, 'corresponds to ', dict[k])
+
+for key, value in dict.items():
+	print(key, ':', value)"""
+
 
 """
-@ Name: ShiftCipher
-@ Description: Simple class to do a shift cipher
+def changemaker(cost, amtPaid):
+	if (amtPaid < cost):
+		print('you owe me more money.')
+	elif(amtPaid == cost):
+		print('no change required')
+	else:
+		change = amtPaid - cost
+		#print(change)
+		if change < 5:
+			print('i will give you ', change, 'dollar bills.')
+		elif change == 5:
+			print('I will give you a five dollar bill.')
+		elif 5 < change < 10:
+			print('I will give you a five and ', (change - 5), 'dollar bills.')
+
+
+changemaker(11, 20)
 """
-class ShiftCipher(object):
-	
-	"""
-	@ Name: __init__
-	@ Description: Constructor
-	@ Params: None
-	"""
+
+"""
+str = 'we dont need no education we dont need no thought control no we dont'
+count = str.count('dont')
+print(count)
+
+"""
+
+
+"""
+class Student:
+    def __init__(self, fname, lname, id, dob):
+        self.first_name = fname
+        self.last_name = lname
+        self.id = id
+        self.dob = dob
+        
+    def __str__(self):
+    	return "(%s, %s, %d, %d)" %(self.first_name, self.last_name, self.id, self.dob)
+        
+newguy = Student('fred', 'flintstone', 776, 33)
+print (Student.__str__(newguy))
+
+"""
+
+"""
+Write a class called wordDictonary that represents an actual dictionary. Your 
+class should contain the following methods:
+loadDictionary :
+     - reads a file that contains word: definition
+     - a word may occur more than once (same word alternate definition)
+     - you should be able to hold all definitions
+updateDictionary:
+     - a method that lets you add a word:definition to the class
+findWord:
+     - this method receives a word, and returns all definitions that correspond to it.
+removeWord:
+     - this method lets you remove a word from the dictionary.
+"""
+"""
+class wordDictonary(object):
 	def __init__(self):
+		self.dict = {}
 		
-		self.plainText = None
-		self.cipherText = None
-		self.cleanText = None
-		self.shift = 3
-
-	"""
-	@ Name: __init__
-	@ Description: Constructor
-	@ Params: None
-	"""
 	def __str__(self):
-		return "plainText: %s\ncipherText: %s\ncleanText: %s\nshift: %d\n" % (self.plainText,self.cipherText,self.cleanText,self.shift)
+		string = ''
+		for k,v in self.dict.items():
+			string += k + ":"
+			for wd in v:
+				string += "\n\t"
+				string += ''.join(wd)
+				
+			string += "\n"
+		return string
+		
+	def loadDictionary(self):
+		path = r"C:\2143-OOP-Schumacher\assignments\scroll.txt"
+		with open(path) as fiName:
+			print(fiName.readline())
+			print(fiName.readline())
+			print(fiName.readline())
+			print(fiName.readline())
+		
+		
 	
-	"""
-	@ Name: promptUserMessage
-	@ Description: Prompts user for message from standard in
-	@ Params: None
-	"""
-	def promptUserMessage(self):
-		temp = input("Message: ")
-		self.setMessage(temp)
-
-	"""
-	@ Name: setMessage
-	@ Description: sets plaintext and then cleans and calls encrypt.
-	@ Params:	message {string}: String message
-	     		encrypted {bool}: False = plaintext True=ciphertext
-	"""
-	def setMessage(self,message,encrypted=False):
-		if(not encrypted):
-			self.plainText = message
-			self.cleanData()
-			self.__encrypt()
+	def updateDictionary(self,word,definition):
+		if not word in self.dict:
+			self.dict[word] = []
+		self.dict[word].append(definition)
+		
+	def findWord(self,word):
+		if word in self.dict:
+			return self.dict[word]
 		else:
-			self.cipherText = message
-			self.__decrypt()
+			return None
+	
+	def removeWord(self,word):
+		if word in self.dict:
+			del self.dict[word]
+			
+			
+wd = wordDictonary()
+wd.updateDictionary('run','go fast')
+wd.updateDictionary('run','move legs powerfully')
+wd.updateDictionary('walk','go slow')
+wd.updateDictionary('walk','not run')
+wd.loadDictionary()
 
-	"""
-	@ Name: getCipherText
-	@ Description: gets cipher text
-	@ Params: None
-	"""	
-	def getCipherText(self):
-		return self.cipherText
 
-	"""
-	@ Name: getPlainText
-	@ Description: gets plain text
-	@ Params: None
-	"""		
-	def getPlainText(self):
-		return self.plainText
 
-	"""
-	@ Name: setShift
-	@ Description: sets this.shift
-	@ Params: shift
-	"""
-	def setShift(self,shift):
-		self.shift = shift
-
-	"""
-	@ Name: getShift
-	@ Description: gets shift
-	@ Params: None
-	"""	
-	def getShift(self):
-		return self.shift
-
-	"""
-	@ Name: cleanData
-	@ Description: 	removes all but alphanumeric characters
-	@				converts all alpha to uppercase
-	@ Params: None
-	"""		
-	def cleanData(self):
-		self.cleanText = ''
-		for letter in self.plainText:
-			if ord(letter) == 32:
-				continue
-			if ord(letter) < 48:
-				continue
-			if 57 < ord(letter) < 65:
-				continue
-			if 90 < ord(letter) < 97:
-				continue
-			if 123 > ord(letter) > 96:
-				self.cleanText += chr(ord(letter)-32)
-			else:
-				self.cleanText += letter
-
-	"""
-	@ Name: __encrypt
-	@ Description: 	encrypts clean text
-	@ Params: None
-	"""	
-	def __encrypt(self):
-		self.cipherText = ''
-		if(not self.cleanText):
-			return
-		for letter in self.cleanText:
-		    self.cipherText += chr((((ord(letter)-65) + self.shift) % 26)+65)
-		    
-	"""
-	@ Name: __decrypt
-	@ Description: 	decrypts cipher text...very simple!
-	@				reverses the encryption process: subtracts shift and reverses
-	@				modulo operation by adding 26 until character is within range
-	@				of uppercase alphanumerics
-	@ Params: None
-	"""	
-	def __decrypt(self):
-		self.plainText = ''
-		if(not self.cipherText):
-			return
-		for letter in self.cipherText:
-			ltr = ord(letter) - self.shift
-			while 57 < ltr < 65 or ltr < 48:
-				ltr += 26 
-			self.plainText += chr(ltr)
-			#self.plainText += chr(ord(letter) - self.shift) 
+print(wd)
 
 """
-Only run this if we call this file directly:
+
 """
-if __name__=='__main__':
+#Given the following example of how to overload an operator:
 
-    alice = ShiftCipher()
-    alice.promptUserMessage()
-    print(alice)
+class Point:
+	def __init__(self, x = 0, y = 0):
+		self.x = x
+		self.y = y
+
+#Looks like an answer to another question!!! ;)
+	def __str__(self):
+		return "({0},{1})".format(self.x,self.y)
+		# or
+		# return "(%d , %d)" % (self.x,self.y)
+
+	def __add__(self,other):
+		x = self.x + other.x
+		y = self.y + other.y
+		return Point(x,y)
+
+	def __compare__(self,other):
+		if(self.x == other.x) and (self.y == other.y):
+			print('They are equal')
+		else:
+			print('They are not')
+
+#And it's usage:
+
+p1 = Point(2,3)
+p2 = Point(-1,2)
+print(p1 + p2)
+# prints: (1,5)
+print(p1 == p2)
+
+#Overload the equal operator to test for point equality.
+
+"""
+
+lst = [1, 2, 5, 7, 9]
+
+def myfunk(worklist):
+	elMin = min(worklist)
+	elMax = max(worklist)
+	elAve = sum(worklist)/len(worklist)
+	print((elMin, elMax, elAve))
+
+myfunk(lst)
 
 
-    bob = ShiftCipher()
-    bob.setMessage(alice.getCipherText(),True)
-   
 
 
-    
-print(bob)
+
+
+
+
+
+
+

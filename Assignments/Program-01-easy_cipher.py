@@ -124,13 +124,16 @@ class ShiftCipher(object):
 		if(not self.cleanText):
 			return
 		for letter in self.cleanText:
-		    self.cipherText += chr((((ord(letter)-48) + self.shift) % 43)+48)
+			""" Changed the adjustment from 65 to 48 to avoid negative numbers; range expanded from 0-26 to 0-43;
+			This eliminates the possibility of a letter and number encrypting to the same value. Sometimes the cipherText
+			will have characters other than alphanumeric, but clean and plain texts are strictly alphanumeric. """
+			self.cipherText += chr((((ord(letter)-48) + self.shift) % 43)+48)
 		    
 	"""
 	@ Name: __decrypt
 	@ Description: 	decrypts cipher text...very simple!
 	@				reverses the encryption process: subtracts shift and reverses
-	@				modulo operation by adding 26 until character is within range
+	@				modulo operation by adding 43 until character is within range
 	@				of uppercase alphanumerics
 	@ Params: None
 	"""	
@@ -140,10 +143,10 @@ class ShiftCipher(object):
 			return
 		for letter in self.cipherText:
 			ltr = ord(letter) - self.shift
-			while 57 < ltr < 65 or ltr < 48:
+			while ltr < 48:
 				ltr += 43 
 			self.plainText += chr(ltr)
-			#self.plainText += chr(ord(letter) - self.shift) 
+			
 
 
 """
