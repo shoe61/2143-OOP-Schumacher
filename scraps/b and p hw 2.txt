@@ -1,0 +1,45 @@
+
+class fraction(object):
+
+    def __init__(self,n=None,d=None):
+        self.numerator = n
+        self.denominator = d
+        self.reduce()
+
+    def __str__(self):
+        return "%d -  %d / %d" % (self.whole,self.numerator,self.denominator)
+
+    def reduce(self):
+        thegcd = self.gcd(self.numerator,self.denominator)
+        self.numerator /= thegcd
+        self.denominator /= thegcd
+        if self.numerator > self.denominator:
+            self.whole = self.numerator / self.denominator
+            self.numerator %= self.denominator
+        
+    def gcd(self, a, b):
+        """Return greatest common divisor using Euclid's Algorithm."""
+        while b:      
+            a, b = b, a % b
+        return a
+    
+    
+    def __mul__(self,rhs):
+        return Fraction(self.numerator * rhs.numerator,self.denominator*rhs.denominator)
+
+    def __add__(self,rhs):
+        denominator = self.denominator * rhs.denominator
+        numerator = (self.numerator * rhs.denominator) + (rhs.numerator * self.denominator)
+        if(numerator == denominator):
+            return 1
+        else:
+            return fraction(numerator,denominator)
+
+
+if __name__=="__main__":
+
+    f1 = fraction(12,36)
+    f2 = fraction(7,8)
+    f3 = f1 + f2
+
+print(f3)
