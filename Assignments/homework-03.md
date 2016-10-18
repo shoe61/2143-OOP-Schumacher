@@ -1,5 +1,5 @@
-Scott Schumacher
-homework-03.md
+###Scott Schumacher
+###homework-03.md
 
 **1)** What does Python print for each of the following:
 
