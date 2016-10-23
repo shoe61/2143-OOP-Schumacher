@@ -3,7 +3,7 @@
 |:--------|:-----------------------------------------------------------|:------------|:---------|:---------------|
 | ***1*** | ***General***                                              |             |          |                |
 | -       | Code was on github                                         | pass/fail   |          | ![Alt text][1] |
-| -       | Code could be ran.                                         | pass/fail   |    -50   | ![Alt text][2] |
+| -       | Code could be ran.                                         | pass/fail   |    -20   | ![Alt text][2] |
 | -       | Code was commented                                         |    10       |    10    | ![Alt text][1] |
 | ***2*** | ***Lists***                                                |             |          |                |
 | -       | 1.1 Basics Part A 			                               |    10       |    10    | ![Alt text][1] |
@@ -13,11 +13,11 @@
 | ***3*** | ***Dictionaries***                                         |             |          |                |
 | -       | 2 Part H			                                         |    10       |    8     | ![Alt text][3] |
 | -       | 2 Part I & J                                               |    20       |    20    | ![Alt text][1] |
-|         | Totals:                                                    | **100**     |  **48** | ![Alt text][2] |
+|         | Totals:                                                    | **100**     |  **78** | ![Alt text][2] |
 
 ### Comments:
 ```
-Code must build! I have no choice but -50 :(
+Thanks
 ```
 
 [1]: http://f.cl.ly/items/3E231i211n2E042B1U3K/right.png  "Correct"
