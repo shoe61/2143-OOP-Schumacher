@@ -5,7 +5,7 @@
 
 #************************************************************
 
-##QUESTION 1:Implement the Cat class by inheriting from the Pet class. Make sure to use superclass methods 
+##QUESTION 1: Implement the Cat class by inheriting from the Pet class. Make sure to use superclass methods 
 ##wherever possible. In addition, add a lose_life method to the Cat class."""
 
 ```python
@@ -67,7 +67,9 @@ print(Spike.name, ' has ', Spike.livesRemaining, ' lives remaining.')
 
 #************************************************************
 
-# QUESTION 2:
+##QUESTION 2:
+
+```python
 
 class Foo(object):
     def __init__(self, a):
@@ -105,7 +107,7 @@ print(f.garply())
 # prints 16
 
 
-
+```
 
 
 
