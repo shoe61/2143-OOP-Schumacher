@@ -5,10 +5,10 @@
 
 #************************************************************
 
-"""QUESTION 1: 1. Implement the Cat class by inheriting from the Pet class. Make sure to use superclass methods 
-wherever possible. In addition, add a lose_life method to the Cat class."""
+##QUESTION 1:Implement the Cat class by inheriting from the Pet class. Make sure to use superclass methods 
+##wherever possible. In addition, add a lose_life method to the Cat class."""
 
-
+''' python
 
 class Pet(object):
     def __init__(self, name, owner):
@@ -62,7 +62,7 @@ Spike.lose_life()
 # New balance
 print(Spike.name, ' has ', Spike.livesRemaining, ' lives remaining.')
 
-
+'''
 
 
 #************************************************************

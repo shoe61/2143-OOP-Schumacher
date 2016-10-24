@@ -274,7 +274,9 @@ class Game(object):
         while not self.WinnerExists():
             print(self)
             for name,PlayerObj in self.Players.items():
-                PlayerObj.Roll()
+                    PlayerObj.Roll()
+            
+
        
     """
     @Method: WinnerExists
