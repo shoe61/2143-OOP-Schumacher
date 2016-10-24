@@ -28,7 +28,13 @@ class Dog(Pet):
         print('woof!')
 
 
-
+"""
+@Class: 		Cat
+@Description: 	extends Pet class to describe a cat
+@Methods: 		talk- gives cat distinct voice 
+				lose_life- decrements the cat's number of lives; kills cat at zero.
+"""  
+  
 class Cat(Pet):
     def __init__(self, name, owner, lives=9):
         Pet.__init__(self, name, owner)
