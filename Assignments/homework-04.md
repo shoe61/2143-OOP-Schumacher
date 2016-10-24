@@ -1,7 +1,7 @@
 ###Scott Schumacher
 ###homework-04.md
 
-'''python
+
 
 #************************************************************
 
@@ -104,7 +104,7 @@ f.baz = lambda val: val * val
 print(f.garply())
 # prints 16
 
-'''
+
 
 
 
