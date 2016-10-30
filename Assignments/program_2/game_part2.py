@@ -1,11 +1,24 @@
-## Scott Schumacher
-
-## game_part1.py
-
 """
-This is part one of the Pig Game project; I have gotten the code running and
-written a few lines in the player class to cause the player to stop rolling after
-achieving a winning score. 
+@ Scott Schumacher
+@ game_part1.py
+
+This is part two of the Pig Game project. Now, different strategies are available:
+in addition to Random, there are Aggressive and Cautious. Bob is Aggressive; Ann
+is Cautious; and Sue and Dax use the Random strategy. Any player that reaches
+eighty percent of the target score switches to the Sprint to Finish strategy, 
+in which he or she rolls until reaching target or losing turn.
+
+Random: roll some number of times between 1 and 7
+Cautious: roll some number of times between 1 and 3
+Aggressive: roll some number of times between 1 and 10
+Sprint to Finish: roll until target score or crash and burn.
+
+Under this regime, with a sample size of 50 games,
+Bob (aggressive) won 25
+Sue (random) won 14
+Dax (random) won 11
+Ann (cautous) won 0
+
 """
 
 ############################################################################
@@ -171,7 +184,16 @@ class Player(object):
         self.LastScore = Score
         self.LastNumRolls = NumRolls
         
-        
+    
+    """
+    @Method: RandomRoll
+    @Description: Rolls some number of times between 1 and 7; declares victory and stops
+    @rolling if reaches target (winning) score.
+    @Params: None
+    @Returns: int: Score, NumRolls
+
+    """
+
     def RandomRoll(self):
         Score = 0
         Needed = self.winning_score - self.TotalScore # how do I know when to quit?
@@ -187,8 +209,16 @@ class Player(object):
                 return(Score,NumRolls)
                 break          
         return (Score,NumRolls)
-
-            
+    
+    """
+    @Method: Aggressive
+    @Description: Rolls some number of times between 1 and 10; declares victory and stops
+    @rolling if reaches target (winning) score.
+    @Params: None
+    @Returns: int: Score, NumRolls
+    
+    """
+    
     def Aggressive(self):
         Score = 0
         Needed = self.winning_score - self.TotalScore # how do I know when to quit?
@@ -204,7 +234,16 @@ class Player(object):
                 return(Score,NumRolls)
                 break          
         return (Score,NumRolls)
-        
+         
+    """
+    @Method: Cautious
+    @Description: Rolls some number of times between 1 and 3; declares victory and stops
+    @rolling if reaches target (winning) score.
+    @Params: None
+    @Returns: int: Score, NumRolls
+    
+    """
+   
     def Cautious(self):
         Score = 0
         Needed = self.winning_score - self.TotalScore # how do I know when to quit?
@@ -226,9 +265,16 @@ class Player(object):
         
     def Copycat(self):
         pass
+    
+    """
+    @Method: SprintToFinish
+    @Description: Rolls until target score reached or rolls a 1.
+    @Params: None
+    @Returns: int: Score, NumRolls
+    
+    """
 
     def SprintToFinish(self):
-        print('sprinting')
         Score = 0
         Needed = self.winning_score - self.TotalScore # how do I know when to quit?
         NumRolls = 0
@@ -302,8 +348,9 @@ class Game(object):
                     
     """
     @Method: StartGame
-    @Description: As long as no winner, loops through players, assigns the strategy to be used on
-     the next roll, and calls player to roll.
+    @Description: Loops through the list of players, calling each to roll. If, at the beginning
+    @of the turn, the player has 80% percent or more of the winning score, changes player's 
+    @strategy to Sprint to Finish.
     @Params:None
     @Returns: None
     """         
@@ -318,7 +365,8 @@ class Game(object):
                 # If player is within 20% of winning, switch to SprintToFinish
                 if PlayerObj.TotalScore >=  self.TargetScore * .80:
                     PlayerObj.SetStrategy('SprintToFinish', 12)
-                    print(PlayerObj.Name, ' go for it using the ', PlayerObj.Strategy, 'strategy')
+                    # all the spectators cheer for the big push for victory...
+                    print(PlayerObj.Name,', go for it using the ', PlayerObj.Strategy, 'strategy!')
                     
                 PlayerObj.Roll()
        
@@ -371,6 +419,12 @@ def main():
     is a list of the Players and is included in kwargs, it was not otherwise possible.
     """
     winning_score = 100
+
+    """
+    Players are assigned different strategies; regardless of the strategy assigned,
+    all players switch to Sprint to Finish upon reaching eighty percent of goal.
+    
+    """
     
     p1 = Player('ann' , winning_score, 1, ('Cautious',3) )
     p2 = Player('bob' , winning_score, 1, ('Aggressive', 9))
