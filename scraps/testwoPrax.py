@@ -34,7 +34,7 @@ print(c3)
 
 
 """
-import math
+from math import sqrt, pow
 
 class Color(object):
     def __init__(self, argeebee):
@@ -122,4 +122,81 @@ print('c6: ', c6)
 print('c7: ', c7)
 print('c8: ', c8)
 
-    
+
+"""
+Create a point class, line class, and a rectangle class.
+
+    A point is a tuple of two integers: (3,6)
+   
+"""
+
+class Point(object):
+
+    def __init__(self, x, y):
+        self.x = x
+        self.y = y
+        self.point = (self.x, self.y)
+
+    def __str__(self):
+        return'(%d, %d)' %(self.x,self.y)
+
+
+pencil = Point(2,3)
+pen = Point(8,11)
+print(pencil)
+pencil.x = 4
+print(pencil)
+
+"""
+ A line consists of two points: (3,6),(7,8)
+        Add a length method
+
+"""
+
+class Line(Point):
+   
+    def __init__(self, p1, p2):
+        self.p1 = p1
+        self.p2 = p2
+        self.line = (p1, p2)
+
+    def __str__(self):
+        tmp = ''
+        tmp = tmp +  '(' + self.p1.__str__() + ', ' + self.p2.__str__() +')'
+        return 'the line is defined by two points: ' + tmp
+
+    def Length(self):
+        return sqrt(pow((self.p1.x - self.p2.x), 2) + (pow((self.p1.y -self.p2.y), 2)))
+
+kudo = Line(pencil, pen)
+print(kudo)
+print('kudo length: ', kudo.Length())
+
+"""
+A rectangle consists of two points as well, the upper right, and the lower left.
+        Add an area and perimeter method
+
+"""
+
+class Rectangle(Point):
+
+    ## the rectangle's points will be enumerated clockwise from the lower left hand corner(p1)
+    def __init__(self, p1, p3):
+        self.p1 = p1
+        self.p2 = Point((p1.x), (p3.y))
+        self.p3 = p3
+        self.p4 = Point((p3.x), (p1.y))
+        self.rectangle = (self.p1, self.p2, self.p3, self.p4)
+        self.length = abs(self.p1.x - self.p3.x)
+        self.width = abs(self.p1.y - self.p2.y)
+
+    def Area(self):
+        return self.length * self.width
+
+    def Perimeter(self):
+        return 2 * (self.length + self.width)
+
+bwoonhilda = Rectangle (pencil, pen)
+print('bwoonhilda area is: ', bwoonhilda.Area())
+print('bwoonhilda perimeter is: ', bwoonhilda.Perimeter())
+
