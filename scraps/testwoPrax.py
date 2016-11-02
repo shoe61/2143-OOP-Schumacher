@@ -254,12 +254,12 @@ Run a binary search on the following values looking for key=55. Show the index v
 class BinSearch(object):
 
     def __init__(self, somelist):
-        self.workList = []
+        #self.workList = []
         self.worklist = sorted(somelist)
      
     def FindIt(self, target):
         f = 0
-        l = len(self.worklist) 
+        l = len(self.worklist) - 1
         found = False
         while not found:
             m = (f + l)//2
@@ -275,7 +275,7 @@ class BinSearch(object):
                     f = m + 1
 
 exlist = BinSearch([1,3,5,7,9,11,13,15,17,19])
-print('finding in list: at index ', exlist.FindIt(1))
+print('finding in list: at index ', exlist.FindIt(15))
 
 """
 Write a function that removes all instances of an element from a list.
