@@ -41,12 +41,16 @@ class Color(object):
         self.red = argeebee[0]
         self.green = argeebee[1]
         self.blue = argeebee[2]
-        self.color = (self.red, self.green, self.blue)    
-    
+        self.color = (self.red, self.green, self.blue) 
 
     def __str__(self):
         return"red: %d, green: %d, blue: %d" %(self.red, self.green, self.blue)
 
+    def setColor(self, argeebee):
+        self.red = argeebee[0]
+        self.green = argeebee[1]
+        self.blue = argeebee[2]
+        self.color = (self.red, self.green, self.blue)
 
     def __add__(self, annudder):
         red = int(self.red + annudder.red)
@@ -54,15 +58,12 @@ class Color(object):
         blue = int(self.blue + annudder.blue)
         return Color((int(red/2), int(green/2), int(blue/2)))
 
-
-
-
 c1 = Color((255, 0, 0))
 print('c1.red: ', c1.red)
 c1.blue = 100
 print('c1 after changing blue to 100: ', c1)
-c1.color = (0, 0, 0) # hold it! tuples are immutable.
-print('tuples are immutable: ', c1)
+c1.setColor((0, 0, 0)) 
+print(c1)
 
 
 c1 = Color((255,255,255))
@@ -190,6 +191,11 @@ class Rectangle(Point):
         self.length = abs(self.p1.x - self.p3.x)
         self.width = abs(self.p1.y - self.p2.y)
 
+    def __str__(self):
+        tmp = ''
+        tmp = tmp + '(' + self.p1.__str__() + ', ' + self.p2.__str__() + ', ' + self.p3.__str__() + ', ' + self.p4.__str__() + ')'
+        return 'the corners of the rectangle, clockwise from the lower left, are: ' + tmp
+
     def Area(self):
         return self.length * self.width
 
@@ -199,4 +205,201 @@ class Rectangle(Point):
 bwoonhilda = Rectangle (pencil, pen)
 print('bwoonhilda area is: ', bwoonhilda.Area())
 print('bwoonhilda perimeter is: ', bwoonhilda.Perimeter())
+print(bwoonhilda)
+
+"""
+
+
+Write a Student class that extends the Person class and add a method: is_honor_student that would print True if the students gpa is greater than 3.0
+
+student = Student('G. H. Hardy', 70, 4.0)
+print student.is_old()  # prints True
+print student.is_honor_student()    # prints True
+
+"""
+class Person(object):
+
+    def __init__(self, name, age):
+        self.name = name
+        self.age = age
+
+    def is_old(self):
+        return self.age > 40
+
+
+person = Person('G. H. Hardy', 70)  
+print ('person is old: ', person.is_old()) # Prints True
+
+class Student(Person):
+    
+    def __init__(self, name, age, gpa):
+        super().__init__(name, age)
+        self.gpa = gpa
+
+    def is_honor_student(self):
+        return self.gpa >= 3.0
+
+
+student = Student('shoe', 55, 4.0)
+print(student.name)
+print('student is honor student: ', student.is_honor_student())
+print('student is old: ', student.is_old())
+
+"""
+Run a binary search on the following values looking for key=55. Show the index values for first mid and last at each iteration.
+0 	1 	2 	3 	4 	5 	6 	7 	8 	9 	10
+0 	5 	13 	19 	22 	41 	55 	68 	72 	81 	98
+
+"""
+class BinSearch(object):
+
+    def __init__(self, somelist):
+        self.workList = []
+        self.worklist = sorted(somelist)
+     
+    def FindIt(self, target):
+        f = 0
+        l = len(self.worklist) 
+        found = False
+        while not found:
+            m = (f + l)//2
+            if f > l:
+                return None
+            elif self.worklist[m] == target:
+                found = True
+                return m
+            else:
+                if self.worklist[m] > target:
+                    l = m -1
+                else:
+                    f = m + 1
+
+exlist = BinSearch([1,3,5,7,9,11,13,15,17,19])
+print('finding in list: at index ', exlist.FindIt(1))
+
+"""
+Write a function that removes all instances of an element from a list.
+
+def remove_all(el, lst):
+Removes all instances of el from lst.
+>>> x = [3, 1, 2, 1, 5, 1, 1, 7]
+>>> remove_all(1, x)
+>>> x
+[3, 2, 5, 7]
+
+"""
+
+def remove_all(el, lst):
+    while el in lst:
+            lst.remove(el)
+
+x = [3, 1, 2, 1, 5, 1, 1, 7]
+remove_all(1, x)
+print('list after removal of all ones: ', x)
+
+"""
+Given a list of words like so:
+
+words = [
+   'look', 'into', 'my', 'eyes', 'look', 'into', 'my', 'eyes',
+   'the', 'eyes', 'the', 'eyes', 'the', 'eyes', 'not', 'around', 'the',
+   'eyes', "don't", 'look', 'around', 'the', 'eyes', 'look', 'into',
+   'my', 'eyes', "you're", 'under'
+]
+
+Write a python snippet to find the words that occur most often. You output should look something like the following:
+
+[('eyes', 8), ('the', 5), ('look', 4)]
+
+
+"""
+
+words = [
+   'look', 'into', 'my', 'eyes', 'look', 'into', 'my', 'eyes',
+   'the', 'eyes', 'the', 'eyes', 'the', 'eyes', 'not', 'around', 'the',
+   'eyes', "don't", 'look', 'around', 'the', 'eyes', 'look', 'into',
+   'my', 'eyes', "you're", 'under'
+]
+from operator import itemgetter
+
+class WordCounter(object):
+    def __init__(self, wordList):
+        self.workList = sorted(wordList )
+        self.wordLister()
+
+    def wordLister(self):
+        self.countList = []
+        for word in self.workList:
+            if not word in self.countList:
+                self.countList.append(word)
+        self.countWords()
+
+    def countWords(self):
+        self.summaryList = []
+        for target in self.countList:
+            count = 0
+            for word in self.workList:
+                if word == target:
+                    count += 1
+            self.summaryList.append((target, count))
+        self.summaryList = sorted(self.summaryList, key = itemgetter(1), reverse = True)
+        print('the words in the list, in descending order of frequency, are: ', self.summaryList)
+
+hypno = WordCounter(words)
+#hypno.wordLister()
+#hypno.countWords()
+
+"""
+Write a class called book_analysis that will do a word frequency analysis on a book. You can assume that the book has had all punctuation removed. 
+Your class should count the number of unique words and be able to return the nth most frequent word. Below is some code that WILL actually do what 
+I'm asking you to do (but not in a class).
+
+"""
+import string
+import operator
+
+class Book_analyzer(object):
+
+    def __init__(self, bookfile):
+        self.dict = {}
+        self.f = bookfile
+        for line in self.f:
+            self.exclude = set(string.punctuation)
+            self.words = ''.join(ch for ch in line.strip() if ch not in self.exclude).lower()
+            for word in self.words.split(' '):
+                if not word in self.dict:
+                    self.dict[word] = 0
+                self.dict[word] += 1
+        self.orderlist = sorted(self.dict.items(), key=operator.itemgetter(1), reverse=True)
+       
+    def occurs(self, key):
+        for zork in self.orderlist:
+            if zork[0] == key:
+                return zork
+        else:
+            return None
+    
+    def get_nth(self, rank):
+        return self.orderlist[rank - 1]
+
+    def countem(self):
+        return len(self.orderlist)
+
+analyze = Book_analyzer(open('c:/2143-OOP-Schumacher/scraps/2701.txt'))
+
+print('the third most frequently use word in Moby Dick is ', (analyze.get_nth(3)))
+
+print(analyze.occurs('barwait'))
+
+print(analyze.countem())
+
+"""
+
+
+"""
+
+
+
+
+
 
