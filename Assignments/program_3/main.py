@@ -34,7 +34,11 @@ import imageEdit
 #pic = pic.resize((270, 370), Image.ANTIALIAS)
 #pic = imageEdit.checker(pic)
 
-pic = imageEdit.glassFilter(pic, 5)
+#pic = imageEdit.glassFilter(pic, 5)
+
+#pic = imageEdit.hoFlipper(pic)
+
+pic = imageEdit.vFlipper(pic)
 pic.show()
 
 """************************************************************************************************

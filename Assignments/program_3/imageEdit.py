@@ -40,13 +40,18 @@ def checker(img):
                 img.putpixel((x,y), (255, 255, 255))
     return img
 
+    """============================================================================================
+
+
+
+
+
+    ============================================================================================="""
+
 def glassFilter(img, diz):
 
     width = img.size[0]
     height = img.size[1]
-
-    
-    
 
     for x in range(width):
         
@@ -65,9 +70,67 @@ def glassFilter(img, diz):
             b = px[2]
             img.putpixel((x,y), (r,g,b))
 
-
-
     return img
+
+"""============================================================================================
+
+
+
+
+
+============================================================================================="""
+
+def hoFlipper(img):
+
+    width = img.size[0]
+    height = img.size[1]
+
+    for y in range(height):
+        #print("x: ", x, " opp: ", opposite)
+        for x in range(int(width/2)):
+            opposite = (width -1) - x
+            xxl = img.getpixel((x,y))
+            rx = xxl[0]
+            rg = xxl[1]
+            rb = xxl[2]
+            opxl = img.getpixel((opposite, y))
+            rop = opxl[0]
+            gop = opxl[1]
+            bop = opxl[2]
+            img.putpixel((x,y),(rop, gop, bop))
+            img.putpixel((opposite,y),(rx, rg, rb))
+    return img
+
+"""============================================================================================
+
+
+
+
+
+============================================================================================="""
+
+        
+def vFlipper(img):
+
+    width = img.size[0]
+    height = img.size[1]
+
+    for x in range(width):
+        
+        for y in range(int(height/2)):
+            opposite = (height -1) - y
+            yxl = img.getpixel((x,y))
+            rx = yxl[0]
+            rg = yxl[1]
+            rb = yxl[2]
+            opxl = img.getpixel((x, opposite))
+            rop = opxl[0]
+            gop = opxl[1]
+            bop = opxl[2]
+            img.putpixel((x,y),(rop, gop, bop))
+            img.putpixel((x, opposite),(rx, rg, rb))
+    return img
+
 
 
 
