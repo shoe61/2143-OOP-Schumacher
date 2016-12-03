@@ -131,10 +131,45 @@ def vFlipper(img):
             img.putpixel((x, opposite),(rx, rg, rb))
     return img
 
+"""============================================================================================
+method blur
+
+a kernel that extends r pixels in all directions about a given pixel averages all the rgb values
+and writes them to the subject pixel.
+
+To account for borders, the iteration will begin r pixels from any boundary
+
+Parameters: img, the image to be modified, and r, the user-settable blur range
+
+============================================================================================="""
 
 
+def blur(img, rg):
+    
+    width = img.size[0]
+    height = img.size[1]
+    
+    # the kernel traverses an area within the image with a border r pixels wide
+    for x in range(rg, width-(rg + 1)):
+        for y in range(rg, height-(rg + 1)):
+            # average the r, g, b vales of all the pixels within the box defined by (x +- r, y+-r)
+            # that means traversing a box 2r+1 long and wide, summing the values, and dividing by
+            # (2r +1) squared
+            r = 0
+            g = 0
+            b = 0
+            for w in range(2 * rg + 1):
+                for h in range(2 * rg + 1):
+                    pxl = img.getpixel((x - rg + w, y - rg + w))
+                    r = r + pxl[0]
+                    g = g + pxl[1]
+                    b = b + pxl[2]
+            r = int(r /((2 * rg + 1) * (2 * rg + 1)))
+            g = int(g /((2 * rg + 1) * (2 * rg + 1)))
+            b = int(b /((2 * rg + 1) * (2 * rg + 1)))
 
-
+            img.putpixel((x,y),(r, g, b))
+    return img
     
  
 

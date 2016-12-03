@@ -38,7 +38,9 @@ import imageEdit
 
 #pic = imageEdit.hoFlipper(pic)
 
-pic = imageEdit.vFlipper(pic)
+#pic = imageEdit.vFlipper(pic)
+
+pic = imageEdit.blur(pic, 2)
 pic.show()
 
 """************************************************************************************************
