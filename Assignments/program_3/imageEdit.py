@@ -171,6 +171,132 @@ def blur(img, rg):
             img.putpixel((x,y),(r, g, b))
     return img
     
- 
+"""============================================================================================
+
+method posterize
+
+Parameters: img file and snap, which is the value by which all r, g, b colors will be modded by.
+
+Traverse the image, performing the snap operation of each of the three color values.
+
+============================================================================================="""
+
+def posterize(img, snap):
+
+    width = img.size[0]
+    height = img.size[1]
+
+    # traverse the image 
+    for x in range (width):
+        for y in range(height):
+            #read the pixel and extract the values
+            (r,g,b) = img.getpixel((x,y))
+            # round each color up or down to the nearest snap ValueError
+            
+            rr = r
+            m = rr % snap
+            if m < (snap // 2):
+                rr -= m
+            else:
+                rr += (snap - m)
+            
+            gg = g
+            n = gg % snap
+            if n < (snap // 2):
+                gg -= n
+            else:
+                gg += (snap - n)
+
+            bb = b
+            o = bb % snap
+            if o < (snap // 2):
+                bb-= o
+            else:
+                bb += (snap - o)  
+
+            img.putpixel((x, y), (rr, gg, bb))
+
+    return img
+
+"""============================================================================================
+
+method solarize
+
+negates the r, g, b values of each pixel if they exceed a user-defined threshold
+
+paramters: img, threshold
+
+============================================================================================="""   
+
+def solarize(img, lim):
+
+    width, height = img.size
+
+    for x in range(width):
+        for y in range(height):
+            (r, g, b) = img.getpixel((x, y)) 
+
+            rr = r
+            if rr > lim:
+                rr = 255 - lim
+
+            gg = g
+            if gg > lim:
+                gg = 255 - lim
+            
+            bb = b
+            if bb > lim:
+                bb = 255 - lim
+
+            img. putpixel((x,y), (rr, gg, bb))
+
+    return img
+
+"""============================================================================================
+"In the future, everyone will be famous for fifteen minutes." --Andy Warhol
+
+method warhol: converts image to grayscale, then posterizes; for each interval created, uses a 
+single list- defined color provided by method (not user defined)
+
+parameters: img and snap value.
+
+============================================================================================="""
+
+def warhol(img, snap):
+
+    width, height = img.size
+
+    # number of regions = 255 / snap
+    regions = int(255/snap)
+    
+
+    # color list:
+    colors =[(255,0,0), (0, 255, 0), (0, 0, 255), (128, 128, 0), (0, 128, 128)]
+
+    # set up the traverse loop
+    for x in range(width):
+        for y in range(height):
+            # get grayscale Image
+            r, g, b = img.getpixel((x, y))
+            gra = int((r+g+b)/3)
+            img.putpixel((x,y), (gra, gra, gra))
+            #posterize one channel (they're all the same!)
+            rr = r
+            m = rr % snap
+            if m < (snap // 2):
+                rr -= m
+            else:
+                rr += (snap - m)
+
+            # now, evaluate rr to determine the color to be used for the pixel
+            for i in range(1, regions + 1):
+               
+                if rr < (i * 255) / regions and rr > (i - 1) * 255/ regions:
+                    img.putpixel((x, y), (colors[i % 5 -1]))
+                
+
+
+
+    return img
 
     

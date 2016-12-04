@@ -40,7 +40,13 @@ import imageEdit
 
 #pic = imageEdit.vFlipper(pic)
 
-pic = imageEdit.blur(pic, 2)
+#pic = imageEdit.blur(pic, 2)
+
+#pic = imageEdit.posterize(pic, 64)
+
+#pic = imageEdit.solarize(pic, 190)
+
+pic = imageEdit.warhol(pic, 64)
 pic.show()
 
 """************************************************************************************************
