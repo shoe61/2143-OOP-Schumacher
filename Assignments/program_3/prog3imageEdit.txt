@@ -1,8 +1,9 @@
-"""************************************************************************************************
+"""****************************************************************************
 Scott Schumacher, Program 3
 imageEdit.py
 
-This file contains image filter methods; it's used by main to perform operations on existing images:
+This file contains image filter methods; it's used by main to perform operations
+on existing images:
 
     glass_effect
     flip
@@ -11,7 +12,7 @@ This file contains image filter methods; it's used by main to perform operations
     solarize
     warhol
 
-************************************************************************************************"""
+****************************************************************************"""
 
 from PIL import Image, ImageDraw, ImageFont, ImageFilter
 import os
@@ -20,15 +21,16 @@ import random
 import urllib
 from io import StringIO
 
-"""============================================================================================
+"""============================================================================
 
 method checker
 
-traverse the image; for all pixels where x and y are multiples of 2, color the pixel black
+traverse the image; for all pixels where x and y are multiples of 2, color the 
+pixel black
 
 Params: img
 
-============================================================================================="""
+============================================================================"""
 
 def checker(img):
     width = img.size[0]
@@ -39,16 +41,17 @@ def checker(img):
                 img.putpixel((x,y), (255, 255, 255))
     return img
 
-"""============================================================================================
+"""============================================================================
 
 method glassFilter
 
-traverse the image and substitute for each pixel another random pixel within diz of the current
-pixel. Using if statements allows the effect to extend all the way to the borders of the image.
+traverse the image and substitute for each pixel another random pixel within diz 
+of the current pixel. Using if statements allows the effect to extend all the 
+way to the borders of the image.
 
 Params: img and diz, the distance within which a random pixel can be selected
 
-============================================================================================="""
+============================================================================"""
 
 def glassFilter(img, diz):
 
@@ -74,15 +77,16 @@ def glassFilter(img, diz):
 
     return img
 
-"""============================================================================================
+"""============================================================================
 
 method hoFlipper (horizontal flipper)
 
-traverse HALF the image, substituting a column of pixels for its mirror counterpart
+traverse HALF the image, substituting each column of pixels for 
+its mirror counterpart
 
 Params: img
 
-============================================================================================="""
+============================================================================"""
 
 def hoFlipper(img):
 
@@ -105,15 +109,16 @@ def hoFlipper(img):
             img.putpixel((opposite,y),(rx, rg, rb))
     return img
 
-"""============================================================================================
+"""============================================================================
 
 method vFlipper (vertical flipper)
 
-traverse HALF the image, substituting a row of pixels for its mirror counterpart
+traverse HALF the image, substituting a row of pixels for its 
+mirror counterpart
 
 Params: img
 
-============================================================================================="""
+============================================================================"""
 
         
 def vFlipper(img):
@@ -137,17 +142,17 @@ def vFlipper(img):
             img.putpixel((x, opposite),(rx, rg, rb))
     return img
 
-"""============================================================================================
+"""============================================================================
 method blur
 
-a kernel that extends r pixels in all directions about a given pixel averages all the rgb values
-and writes them to the subject pixel.
+a kernel that extends r pixels in all directions about a given pixel averages 
+all the rgb values and writes them to the subject pixel.
 
 To account for borders, the iteration will begin r pixels from any boundary
 
 Parameters: img, the image to be modified, and r, the user-settable blur range
 
-============================================================================================="""
+============================================================================"""
 
 
 def blur(img, rg):
@@ -158,9 +163,10 @@ def blur(img, rg):
     # the kernel traverses an area within the image with a border r pixels wide
     for x in range(rg, width-(rg + 1)):
         for y in range(rg, height-(rg + 1)):
-            # average the r, g, b values of all the pixels within the box defined by (x +- r, y+-r)
-            # that means traversing a box 2r+1 long and wide, summing the values, and dividing by
-            # (2r +1) squared
+            # average the r, g, b values of all the pixels within the box 
+			# defined by (x +- r, y+-r) That means traversing a box 2r+1 long
+            # and wide, summing the values, and dividing by (2r +1) squared.
+            #  
             r = 0
             g = 0
             b = 0
@@ -177,15 +183,16 @@ def blur(img, rg):
             img.putpixel((x,y),(r, g, b))
     return img
     
-"""============================================================================================
+"""============================================================================
 
 method posterize
 
-Parameters: img file and snap, which is the value by which all r, g, b colors will be modded by.
+Parameters: img file and snap, which is the value by which all r, g, b colors 
+will be modded by.
 
-Traverse the image, performing the snap operation of each of the three color values.
+Traverse the image, performing snap operation of each of the three color values.
 
-============================================================================================="""
+============================================================================"""
 
 def posterize(img, snap):
 
@@ -224,7 +231,7 @@ def posterize(img, snap):
 
     return img
 
-"""============================================================================================
+"""============================================================================
 
 method solarize
 
@@ -232,7 +239,7 @@ negates the r, g, b values of each pixel if they exceed a user-defined threshold
 
 paramters: img, threshold
 
-============================================================================================="""   
+============================================================================"""   
 
 def solarize(img, lim):
 
@@ -258,15 +265,15 @@ def solarize(img, lim):
 
     return img
 
-"""============================================================================================
+"""============================================================================
 "In the future, everyone will be famous for fifteen minutes." --Andy Warhol
 
-method warhol: converts image to grayscale, then posterizes; for each interval created, uses a 
-single list- defined color provided by method (not user defined)
+method warhol: converts image to grayscale, then posterizes; for each interval 
+created, uses a single list- defined color provided by method (not user defined)
 
 parameters: img and snap value.
 
-============================================================================================="""
+============================================================================"""
 
 def warhol(img, snap):
 
