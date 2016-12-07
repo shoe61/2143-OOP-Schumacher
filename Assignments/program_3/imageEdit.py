@@ -2,7 +2,7 @@
 Scott Schumacher, Program 3
 imageEdit.py
 
-This file contains the ImageEd class; it is used by main to perform operations on existing images:
+This file contains image filter methods; it's used by main to perform operations on existing images:
 
     glass_effect
     flip
@@ -13,7 +13,6 @@ This file contains the ImageEd class; it is used by main to perform operations o
 
 ************************************************************************************************"""
 
-
 from PIL import Image, ImageDraw, ImageFont, ImageFilter
 import os
 import sys
@@ -21,32 +20,35 @@ import random
 import urllib
 from io import StringIO
 
-def picShow(img):
-    img.show()
+"""============================================================================================
 
-def picDescrip(img):
-    print("The picture is ", img.size[0], "pixels wide and ", img.size[1], "pixels high.")
+method checker
 
-def pixLister(img):
-    pixList = list(img.getdata())
-    print(pixList)
+traverse the image; for all pixels where x and y are multiples of 2, color the pixel black
+
+Params: img
+
+============================================================================================="""
 
 def checker(img):
     width = img.size[0]
     height = img.size[1]
     for x in range(width):
         for y in range(height):
-            if x % 2 == 0 and y % 2:
+            if x % 2 == 0 and y % 2 == 0:
                 img.putpixel((x,y), (255, 255, 255))
     return img
 
-    """============================================================================================
+"""============================================================================================
 
+method glassFilter
 
+traverse the image and substitute for each pixel another random pixel within diz of the current
+pixel
 
+Params: img and diz, the distance within which a random pixel can be selected
 
-
-    ============================================================================================="""
+============================================================================================="""
 
 def glassFilter(img, diz):
 
@@ -74,9 +76,11 @@ def glassFilter(img, diz):
 
 """============================================================================================
 
+method hoFlipper (horizontal flipper)
 
+traverse HALF the image, substituting a column of pixels for its mirror counterpart
 
-
+Params: img
 
 ============================================================================================="""
 
@@ -103,9 +107,11 @@ def hoFlipper(img):
 
 """============================================================================================
 
+method vFlipper (vertical flipper)
 
+traverse HALF the image, substituting a row of pixels for its mirror counterpart
 
-
+Params: img
 
 ============================================================================================="""
 
@@ -238,15 +244,15 @@ def solarize(img, lim):
 
             rr = r
             if rr > lim:
-                rr = 255 - lim
+                rr = 255 - rr
 
             gg = g
             if gg > lim:
-                gg = 255 - lim
+                gg = 255 - gg
             
             bb = b
             if bb > lim:
-                bb = 255 - lim
+                bb = 255 - bb
 
             img. putpixel((x,y), (rr, gg, bb))
 
