@@ -46,13 +46,13 @@ described in imageEdit.
 #pic = imageEdit.vFlipper(pic)
 
 # blur takes a long time...a LONG time.
-#pic = imageEdit.blur(pic, 4)
+pic = imageEdit.blur(pic, 4)
 
 #pic = imageEdit.posterize(pic, 250)
 
 #pic = imageEdit.solarize(pic, 190)
 
-pic = imageEdit.warhol(pic, 64)
+#pic = imageEdit.warhol(pic, 64)
 
 pic.show()
 

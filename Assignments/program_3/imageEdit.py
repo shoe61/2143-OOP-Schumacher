@@ -154,6 +154,8 @@ def blur(img, rg):
     
     width = img.size[0]
     height = img.size[1]
+    zerg = 2*rg +1
+    zerg2 = zerg*zerg
     
     # the kernel traverses an area within the image with a border r pixels wide
     for x in range(rg, width-(rg + 1)):
@@ -164,15 +166,15 @@ def blur(img, rg):
             r = 0
             g = 0
             b = 0
-            for w in range(2 * rg + 1):
-                for h in range(2 * rg + 1):
-                    pxl = img.getpixel((x - rg + w, y - rg + w))
+            for w in range(-rg, rg):
+                for h in range(-rg, rg):
+                    pxl = img.getpixel((x + rg, y + rg))
                     r = r + pxl[0]
                     g = g + pxl[1]
                     b = b + pxl[2]
-            r = int(r /((2 * rg + 1) * (2 * rg + 1)))
-            g = int(g /((2 * rg + 1) * (2 * rg + 1)))
-            b = int(b /((2 * rg + 1) * (2 * rg + 1)))
+            r = int(r /zerg2)
+            g = int(g /zerg2)
+            b = int(b /zerg2)
 
             img.putpixel((x,y),(r, g, b))
     return img
@@ -277,7 +279,7 @@ def warhol(img, snap):
     
 
     # color list:
-    colors =[(255,0,0), (0, 255, 0), (0, 0, 255), (128, 128, 0), (0, 128, 128)]
+    colors =[(255,0,0), (0, 255, 0), (0, 0, 255), (128, 128, 0), (128, 0, 128)]
 
     # set up the traverse loop
     for x in range(width):
@@ -287,7 +289,7 @@ def warhol(img, snap):
             gra = int((r+g+b)/3)
             img.putpixel((x,y), (gra, gra, gra))
             #posterize one channel (they're all the same!)
-            rr = r
+            rr = gra
             m = rr % snap
             if m < (snap // 2):
                 rr -= m
